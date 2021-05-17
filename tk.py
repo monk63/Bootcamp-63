@@ -1,6 +1,7 @@
 import tkinter
 from tkinter import *
 from functools import partial
+from tkinter import messagebox
 
 
 win = Tk()
@@ -84,15 +85,185 @@ sum = partial(sum,label,x1,x2)
 button=Button(win,text='calculate',command=sum)
 button.grid()
 '''
-
+#window widgets
+'''
 frame=Frame(win)
 frame.pack()
 
 frame2=Frame(win)
-frame2.pack()
+frame2.pack(side=BOTTOM)
 
-rb=Button(frame,)
+rb=Button(frame,text='red',fg='red')
+rb.pack(side=LEFT)
+
+gb=Button(frame2,text='green',fg='green')
+gb.pack(side=LEFT)
+'''
+
+#list works
+'''
+lb = Listbox(win) 
+lb.insert(1,'cars')
+lb.insert(2,'Benz')
+lb.insert(3,'BMW')
+lb.insert(4,'Fiat')
+lb.pack()
+'''
+#top level
+
+'''
+win.title('Fast Lane')
+top = Toplevel()
+top.title('Draft')
+'''
+
+#message box
+'''
+def Mars():
+    messagebox.showinfo('From Elon Musk','We are going to Mars')
+b=Button(win,text='Mars Ticket',command=Mars)
+b.pack()
+'''
+
+#Menu and menu buttons
+'''
+mb=Menubutton(win,text='Vehicle')
+mb.grid()
+mb.menu=Menu(mb)
+mb['menu']=mb.menu
+
+x1= IntVar()
+x2= IntVar()
+
+mb.menu.add_checkbutton(label='open',variable=x1)
+mb.menu.add_checkbutton(label='open',variable=x2)
+
+mb.pack()
+'''
+
+'''
+def mars():
+     file=Toplevel()
+     button=Button(file,text='off to Mars')
+     button.pack()
+
+menubar = Menu(win)
+
+filemenu = Menu(menubar)
+filemenu.add_command(label='New Car',command=mars)
+filemenu.add_command(label='New Spaceship',command=mars)
+filemenu.add_separator()
+filemenu.add_command(label='New Dock',command=mars)
+filemenu.add_separator()
+filemenu.add_command(label='Exit',command=win.quit) 
+
+menubar.add_cascade(label='Vehicle',menu=filemenu)
+
+win.config(menu=menubar)
+'''
+
+#Scroll widgets
+
+'''
+s=Scale(win)
+s.pack()
+
+sb=Spinbox(win,from_=0,to=10)
+sb.pack()
+'''
+
+'''
+scrollbar=Scrollbar(win)
+scrollbar.pacl(side=RIGHT,fill=Y)
+list=Listbox (win,yscrollcommand=scrollbar.set)
+
+for line in range(101):
+    list.insert(END,'THis line no is'+str(line))
+
+list.pack(side=LEFT,fill=BOTH)
+'''
+
+#Geometry methods
+'''
+b=0
+for i in range(6):
+    for j in range(6):
+        b+=1
+        Button(win,text=str(b),borderwidth=1).grid(row=i,column=j)
+'''
+'''
+l1=Label(win,text='Maths')
+l1.place(x=10,y=10)
+e1=Entry(win,bd=5)
+e1.place(x=60 , y=10 )
+
+l2=Label(win,text='Science')
+l2.place(x=10,y=60)
+e2=Entry(win,bd=5)
+e2.place(x=60 , y=60 )
+
+b= Button(win,text ='submit')
+b.place(x=100,y=100)
+'''
+
+#win.mainloop()
+
+#Turtle
+#kaleido spiral
+'''
+import turtle as t
+import time as ti
+from itertools import cycle
+
+colors = cycle(['red','blue','green','yellow','orange','grey','purple','pink'])
+
+def circle(size,angle,forw):
+    t.pencolor(next(colors))
+    t.circle(size)
+    t.right(angle)
+    t.forward(forw)
+    circle(size+5,angle+1,forw+5)
 
 
-win.mainloop()
 
+
+t.bgcolor('black')
+t.speed('fast')
+t.pensize(4)
+circle(30,0,1)
+
+ti.sleep(2)
+t.hideturtle()
+'''
+#Modified kaleido spiral
+
+'''
+import turtle as t
+import time as ti
+from itertools import cycle
+
+colors = cycle(['red','blue','green','yellow','orange','grey','purple','pink'])
+
+def circle(size,angle,forw,shape):
+    t.pencolor(next(colors))
+    next_shape=''
+    if shape=='circle':
+        t.circle(size)
+        next_shape='square'
+    elif shape == 'square':
+        for i in range(4):
+            t.forward(size*2)
+            t.left(90)
+        next_shape='circle'    
+    t.right(angle)
+    t.forward(forw)
+    circle(size+5,angle+1,forw+1,next_shape)
+
+t.bgcolor('black')
+t.speed('fast')
+t.pensize(4)
+circle(30,0,1,'circle')
+
+ti.sleep(2)
+t.hideturtle()
+'''
